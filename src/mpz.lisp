@@ -22,12 +22,14 @@
 
 ;;; Conversion functions
 
+(defun digits-to-integer (digits)
+  (loop :for digit :across digits
+        :for b := 1 :then (* b $base)
+        :sum (* digit b)))
+
 (defun mpz-integer (mpz)
   (declare (type mpz mpz))
-  (* (sign mpz)
-     (loop :for digit :across (storage mpz)
-           :for b := 1 :then (* b $base)
-           :sum (* digit b))))
+  (* (sign mpz) (digits-to-integer digits)))
 
 (defun integer-mpz (n)
   (declare (type integer n))
