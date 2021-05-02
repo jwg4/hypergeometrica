@@ -4,8 +4,6 @@
 
 (in-package #:hypergeometrica-tests)
 
-;;; Tests start HERE!
-
 (deftest test-arith-intrinsics ()
   "Test the arithmetic intrinsics."
   (multiple-value-bind (sum carry) (h::add64 0 0)
