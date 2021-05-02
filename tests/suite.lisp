@@ -195,8 +195,11 @@
     (loop :for p :in primes-from-the-internet
           :for p-next :in (rest primes-from-the-internet)
           :do (is (= p-next (h::next-prime p)))))
+
   (let ((large-primes-from-the-internet
-          '(1001, 1003)))
+          '(1299367 1299377 1299379 1299437 1299439 1299449
+            1299451 1299457 1299491 1299499 1299533 1299541
+            1299553 1299583)))
     (is (every #'h::primep large-primes-from-the-internet))
     (loop :for p :in large-primes-from-the-internet
           :for p-next :in (rest large-primes-from-the-internet)
