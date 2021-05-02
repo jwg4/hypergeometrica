@@ -52,4 +52,5 @@
   :components ((:file "package")
                (:file "suite")
                (:file "arithmetic")
+               (:file "multiplication")
                (:file "sundries")))
