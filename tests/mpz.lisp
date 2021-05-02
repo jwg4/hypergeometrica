@@ -1,10 +1,8 @@
-;;;; suite.lisp
+;;;; mpz.lisp
 ;;;;
 ;;;; Copyright (c) 2019 Robert Smith
 
 (in-package #:hypergeometrica-tests)
-
-;;; Tests start HERE!
 
 (deftest test-mpz-size ()
   (is (zerop (h::mpz-size (h::integer-mpz 0))))

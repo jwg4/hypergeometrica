@@ -1,4 +1,4 @@
-;;;; suite.lisp
+;;;; multiplication.lisp
 ;;;;
 ;;;; Copyright (c) 2019 Robert Smith
 

@@ -1,10 +1,10 @@
-;;;; suite.lisp
+;;;; sundries.lisp
 ;;;;
 ;;;; Copyright (c) 2019 Robert Smith
 
 (in-package #:hypergeometrica-tests)
 
-;;; Tests start HERE!
+;;;; Tests which don't fit anywhere else ;;;;
 
 (deftest test-sundries ()
   ;; POWER-OF-TWO-P

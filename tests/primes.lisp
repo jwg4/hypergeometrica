@@ -4,8 +4,6 @@
 
 (in-package #:hypergeometrica-tests)
 
-;;; Tests start HERE!
-
 (deftest test-garner ()
   (loop :repeat 50000 :do
     (let* ((moduli #(2 3 5 7 11 13 17 19 23 29 31))
@@ -62,23 +60,3 @@
                   :for (f . k) :in factorization
                   :do (setf x (* x (expt f k)))
                   :finally (is (= x n)))))
-
-(deftest test-finding-moduli ()
-  (loop :for k :from 2 :to 55
-        :for moduli := (h::find-suitable-moduli (expt 2 k) :count 5)
-        :do (is (every #'h::primep moduli))
-            (is (every (lambda (m)
-                         (<= k (nth-value 1 (h::factor-out (1- m) 2))))
-                       moduli))))
-
-(deftest test-primitive-root ()
-  (let* ((N (expt 2 5))
-         (moduli (h::find-suitable-moduli N :count 100))
-         (generators  (mapcar #'h::find-finite-field-generator moduli))
-         (roots (mapcar (lambda (g m) (h::primitive-root-from-generator g N m))
-                        generators
-                        moduli)))
-    (is (every #'h::naive-generator-p generators moduli))
-    (flet ((primitive-nth-root-p (w m)
-             (h::naive-primitive-root-p w N m)))
-      (is (every #'primitive-nth-root-p roots moduli)))))

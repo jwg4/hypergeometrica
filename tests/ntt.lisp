@@ -1,8 +1,11 @@
-;;;; suite.lisp
+;;;; ntt.lisp
 ;;;;
 ;;;; Copyright (c) 2019 Robert Smith
 
 (in-package #:hypergeometrica-tests)
+
+;;;;;;; Tests for parts of the NTT implementation ;;;;;;;
+;; Tests for NTT multiplication itself are in tests/multiplication.lisp
 
 ;;;;;;; These are various NTT implementations used for testing ;;;;;;;
 
@@ -85,7 +88,7 @@ This is just the conjugate-transpose of the NTT matrix, scaled by N."
                           :finally (return (h::m/ (mod s m) N m))))
           :finally (return out))))
 
-
+;;; Tests start HERE!
 (defun test-inversion/matrix (v m w)
   "Tests inversion property of matrix method."
   (let* ((N (length v))
