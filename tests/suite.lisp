@@ -194,6 +194,12 @@
     (is (every #'h::primep primes-from-the-internet))
     (loop :for p :in primes-from-the-internet
           :for p-next :in (rest primes-from-the-internet)
+          :do (is (= p-next (h::next-prime p)))))
+  (let ((large-primes-from-the-internet
+          '(1001, 1003)))
+    (is (every #'h::primep large-primes-from-the-internet))
+    (loop :for p :in large-primes-from-the-internet
+          :for p-next :in (rest large-primes-from-the-internet)
           :do (is (= p-next (h::next-prime p))))))
 
 (deftest test-factorize ()
