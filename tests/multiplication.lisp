@@ -4,6 +4,19 @@
 
 (in-package #:hypergeometrica-tests)
 
+;;;;;;;;;;;;;;;; Testing fast multiplication ;;;;;;;;;;;;;;;;
+
+(deftest test-m*/fast ()
+  (let ((moduli (h::scheme-moduli h::**scheme**)))
+    (dotimes (nmod (length moduli))
+      (let* ((m (aref moduli nmod))
+             (mi (aref (h::scheme-inverses h::**scheme**) nmod)))
+        (loop :repeat 100000 :do
+                (let ((a (random m))
+                      (b (random m)))
+                  (is (= (mod (* a b) m)
+                         (h::m*/fast a b m mi)))))))))
+
 ;;;;;;;;;;;;;;;; Testing Barebones NTT Multiplication ;;;;;;;;;;;;;;;;
 
 (defun digit-count (n)
