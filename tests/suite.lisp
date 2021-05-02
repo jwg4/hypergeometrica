@@ -29,6 +29,10 @@
         :for j := (expt 2 i)
         :do (is (= i (h::next-power-of-two j))))
 
+  (loop :for i :from 2 :to 25
+        :for j := (+ 3 (expt 2 i))
+        :do (is (= (+ 1 i) (h::next-power-of-two j))))
+
   (is (h::coprimep 2 3))
   (is (h::coprimep 4 9))
   (is (not (h::coprimep 4 20)))
@@ -98,6 +102,36 @@
   (%test-m* 10000 1000000000)
   (%test-m* 10000 1000000000000))
 
+(defun %test-m+ (n low)
+  (flet ((r (&optional (high h::$base))
+           (+ low (random (- high low)))))
+    (loop :repeat n
+          :for m := (r h::$max-modulus)
+          :for a := (r m)
+          :for b := (r m)
+          :for x := (h::m+ a b m)
+          :for y := (mod (+ a b) m)
+          :do (is (= x y)))))
+
+(deftest test-m+ ()
+  (%test-m+ 10000 0)
+  (%test-m+ 10000 1000))
+
+(defun %test-m- (n low)
+  (flet ((r (&optional (high h::$base))
+           (+ low (random (- high low)))))
+    (loop :repeat n
+          :for m := (r h::$max-modulus)
+          :for a := (r m)
+          :for b := (r m)
+          :for x := (h::m- a b m)
+          :for y := (mod (- a b) m)
+          :do (is (= x y)))))
+
+(deftest test-m- ()
+  (%test-m- 10000 0)
+  (%test-m- 10000 1000))
+
 (deftest test-garner ()
   (loop :repeat 50000 :do
     (let* ((moduli #(2 3 5 7 11 13 17 19 23 29 31))
@@ -160,6 +194,15 @@
     (is (every #'h::primep primes-from-the-internet))
     (loop :for p :in primes-from-the-internet
           :for p-next :in (rest primes-from-the-internet)
+          :do (is (= p-next (h::next-prime p)))))
+
+  (let ((large-primes-from-the-internet
+          '(1299367 1299377 1299379 1299437 1299439 1299449
+            1299451 1299457 1299491 1299499 1299533 1299541
+            1299553 1299583)))
+    (is (every #'h::primep large-primes-from-the-internet))
+    (loop :for p :in large-primes-from-the-internet
+          :for p-next :in (rest large-primes-from-the-internet)
           :do (is (= p-next (h::next-prime p))))))
 
 (deftest test-factorize ()
