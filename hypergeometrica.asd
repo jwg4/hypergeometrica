@@ -41,6 +41,7 @@
                ;; (:file "fft-multiply")
                ;; (:file "disk")
                (:file "multiply")
+               (:file "xxx")
                (:file "binary-splitting")))
 
 (asdf:defsystem #:hypergeometrica/tests
